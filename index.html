@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Per Te ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: black;
+  overflow: hidden;
+}
+
+/* CINEMA LETTERBOX */
+.bar {
+  position: fixed;
+  width: 100%;
+  height: 10vh;
+  background: black;
+  z-index: 10;
+}
+.top { top: 0; }
+.bottom { bottom: 0; }
+
+/* SCHERMATE */
+.screen {
+  display: none;
+  height: 100vh;
+  width: 100vw;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  color: white;
+  background: radial-gradient(circle, #2a0a1a, #000);
+  animation: fade 1.2s ease;
+}
+
+.active { display: flex; }
+
+@keyframes fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+h1 {
+  color: #ff4da6;
+  padding: 0 20px;
+}
+
+/* BOTTONI */
+button {
+  padding: 14px 20px;
+  margin: 10px;
+  border: none;
+  border-radius: 15px;
+  font-size: 16px;
+  background: #ff4da6;
+  color: white;
+}
+
+/* ICON */
+.icon {
+  font-size: 65px;
+  margin: 15px;
+}
+
+/* POPUP */
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  color: black;
+  padding: 20px;
+  border-radius: 18px;
+  display: none;
+  z-index: 20;
+  text-align: center;
+}
+
+.popup img {
+  max-width: 250px;
+  border-radius: 12px;
+}
+
+/* CUORI */
+.heart {
+  position: fixed;
+  color: #ff4da6;
+  font-size: 18px;
+  animation: fall 6s linear infinite;
+  z-index: 0;
+}
+
+@keyframes fall {
+  0% { transform: translateY(-10vh); opacity: 1; }
+  100% { transform: translateY(110vh); opacity: 0; }
+}
+
+/* video sfondo soft */
+#bgVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  opacity: 0.25;
+  z-index: -1;
+}
+</style>
+</head>
+
+<body>
+
+<!-- CINEMA BORDERS -->
+<div class="bar top"></div>
+<div class="bar bottom"></div>
+
+<!-- VIDEO ATMOSFERA (soft cinematic YouTube loop) -->
+<iframe
+id="music"
+width="0"
+height="0"
+src="https://www.youtube.com/embed/5qap5aO4i9A?autoplay=1&loop=1&playlist=5qap5aO4i9A"
+allow="autoplay">
+</iframe>
+
+<!-- CUORI -->
+<script>
+setInterval(() => {
+  const h = document.createElement("div");
+  h.className = "heart";
+  h.innerHTML = "💖";
+  h.style.left = Math.random()*100 + "vw";
+  h.style.fontSize = (10 + Math.random()*20) + "px";
+  document.body.appendChild(h);
+  setTimeout(() => h.remove(), 6000);
+}, 250);
+</script>
+
+<!-- SCHERMATA 1 -->
+<div class="screen active" id="s1">
+  <div class="icon">🐱💃</div>
+  <h1>Vuoi vedere il tuo regalo?</h1>
+  <button onclick="next(2)">Si per favore</button>
+</div>
+
+<!-- SCHERMATA 2 -->
+<div class="screen" id="s2">
+  <div class="icon">🐱💖</div>
+  <h1>Ti prometto che ti piacerà...</h1>
+  <button onclick="next(3)">Vediamo ❤️</button>
+</div>
+
+<!-- SCHERMATA 3 -->
+<div class="screen" id="s3">
+  <h1>Questi sono per te 🎁</h1>
+
+  <div>
+    <div class="icon" onclick="photo()">📸</div>
+    <div class="icon" onclick="gift()">🎁</div>
+    <div class="icon" onclick="music()">🎵</div>
+  </div>
+</div>
+
+<!-- POPUP -->
+<div class="popup" id="popup">
+  <div id="content"></div>
+  <br>
+  <button onclick="closeP()">Chiudi</button>
+</div>
+
+<script>
+function next(n){
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('s'+n).classList.add('active');
+}
+
+function photo(){
+  document.getElementById("content").innerHTML =
+    "<img src='foto_coppia.jpg'><p>Il nostro momento 💖</p>";
+  document.getElementById("popup").style.display = "block";
+}
+
+function gift(){
+  document.getElementById("content").innerHTML =
+    "<img src='IMG_3842.jpeg'><p>Per te 🎁</p>";
+  document.getElementById("popup").style.display = "block";
+}
+
+function music(){
+  window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ", "_blank");
+}
+
+function closeP(){
+  document.getElementById("popup").style.display = "none";
+}
+</script>
+
+</body>
+</html>
