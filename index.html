@@ -3,28 +3,51 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Per Te ❤️</title>
+
+<title>LEVEL LOVE</title>
+
+<!-- pixel font -->
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
 <style>
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: black;
+  font-family: 'Press Start 2P', cursive;
+  background: #0b0000;
+  color: white;
   overflow: hidden;
 }
 
-/* CINEMA LETTERBOX */
-.bar {
+/* scanlines effetto retro */
+body::before {
+  content: "";
   position: fixed;
   width: 100%;
-  height: 10vh;
-  background: black;
-  z-index: 10;
+  height: 100%;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.03),
+    rgba(255,255,255,0.03) 1px,
+    transparent 2px,
+    transparent 4px
+  );
+  pointer-events: none;
 }
-.top { top: 0; }
-.bottom { bottom: 0; }
 
-/* SCHERMATE */
+/* sfondo pixel grid */
+body::after {
+  content: "";
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background:
+    linear-gradient(rgba(255,0,0,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,0,0,0.08) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
 .screen {
   display: none;
   height: 100vh;
@@ -33,38 +56,48 @@ body {
   justify-content: center;
   flex-direction: column;
   text-align: center;
-  color: white;
-  background: radial-gradient(circle, #2a0a1a, #000);
-  animation: fade 1.2s ease;
 }
 
-.active { display: flex; }
-
-@keyframes fade {
-  from { opacity: 0; }
-  to { opacity: 1; }
+.active {
+  display: flex;
 }
 
+/* TITOLI */
 h1 {
-  color: #ff4da6;
-  padding: 0 20px;
+  color: white;
+  text-shadow: 0 0 10px red;
+  font-size: 14px;
+  padding: 20px;
 }
 
 /* BOTTONI */
 button {
-  padding: 14px 20px;
-  margin: 10px;
-  border: none;
-  border-radius: 15px;
-  font-size: 16px;
-  background: #ff4da6;
+  font-family: 'Press Start 2P', cursive;
+  background: black;
+  border: 2px solid red;
   color: white;
+  padding: 12px;
+  margin: 10px;
+  cursor: pointer;
 }
 
-/* ICON */
+button:hover {
+  background: red;
+  color: black;
+}
+
+/* GIF */
+img.gif {
+  width: 120px;
+  margin: 10px;
+  image-rendering: pixelated;
+}
+
+/* ICONE */
 .icon {
-  font-size: 65px;
-  margin: 15px;
+  width: 80px;
+  margin: 10px;
+  cursor: pointer;
 }
 
 /* POPUP */
@@ -72,106 +105,54 @@ button {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  background: white;
-  color: black;
+  transform: translate(-50%,-50%);
+  background: black;
+  border: 2px solid red;
   padding: 20px;
-  border-radius: 18px;
   display: none;
-  z-index: 20;
   text-align: center;
+  z-index: 10;
 }
 
 .popup img {
-  max-width: 250px;
-  border-radius: 12px;
-}
-
-/* CUORI */
-.heart {
-  position: fixed;
-  color: #ff4da6;
-  font-size: 18px;
-  animation: fall 6s linear infinite;
-  z-index: 0;
-}
-
-@keyframes fall {
-  0% { transform: translateY(-10vh); opacity: 1; }
-  100% { transform: translateY(110vh); opacity: 0; }
-}
-
-/* video sfondo soft */
-#bgVideo {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  min-width: 100%;
-  min-height: 100%;
-  opacity: 0.25;
-  z-index: -1;
+  max-width: 200px;
+  margin-top: 10px;
+  border: 2px solid white;
 }
 </style>
 </head>
 
 <body>
 
-<!-- CINEMA BORDERS -->
-<div class="bar top"></div>
-<div class="bar bottom"></div>
-
-<!-- VIDEO ATMOSFERA (soft cinematic YouTube loop) -->
-<iframe
-id="music"
-width="0"
-height="0"
-src="https://www.youtube.com/embed/5qap5aO4i9A?autoplay=1&loop=1&playlist=5qap5aO4i9A"
-allow="autoplay">
-</iframe>
-
-<!-- CUORI -->
-<script>
-setInterval(() => {
-  const h = document.createElement("div");
-  h.className = "heart";
-  h.innerHTML = "💖";
-  h.style.left = Math.random()*100 + "vw";
-  h.style.fontSize = (10 + Math.random()*20) + "px";
-  document.body.appendChild(h);
-  setTimeout(() => h.remove(), 6000);
-}, 250);
-</script>
-
 <!-- SCHERMATA 1 -->
 <div class="screen active" id="s1">
-  <div class="icon">🐱💃</div>
-  <h1>Vuoi vedere il tuo regalo?</h1>
-  <button onclick="next(2)">Si per favore</button>
+  <img class="gif" src="https://media.giphy.com/media/l0HlNaQ6gWfllcjDO/giphy.gif">
+  <h1>VUOI APRIRE IL REGALO?</h1>
+  <button onclick="next(2)">SI</button>
 </div>
 
 <!-- SCHERMATA 2 -->
 <div class="screen" id="s2">
-  <div class="icon">🐱💖</div>
-  <h1>Ti prometto che ti piacerà...</h1>
-  <button onclick="next(3)">Vediamo ❤️</button>
+  <img class="gif" src="https://media.giphy.com/media/3o7aD2saalBwwftBIY/giphy.gif">
+  <h1>CARICAMENTO EMOZIONI...</h1>
+  <button onclick="next(3)">CONTINUA</button>
 </div>
 
 <!-- SCHERMATA 3 -->
 <div class="screen" id="s3">
-  <h1>Questi sono per te 🎁</h1>
+  <h1>LEVEL COMPLETATO: TI AMO</h1>
 
   <div>
-    <div class="icon" onclick="photo()">📸</div>
-    <div class="icon" onclick="gift()">🎁</div>
-    <div class="icon" onclick="music()">🎵</div>
+    <img class="icon" onclick="photo()" src="https://media.giphy.com/media/26BRuo6sLetdllPAQ/giphy.gif">
+    <img class="icon" onclick="gift()" src="https://media.giphy.com/media/3o7aD2saalBwwftBIY/giphy.gif">
+    <img class="icon" onclick="music()" src="https://media.giphy.com/media/13borq7Zo2kulO/giphy.gif">
   </div>
 </div>
 
 <!-- POPUP -->
 <div class="popup" id="popup">
   <div id="content"></div>
-  <br>
-  <button onclick="closeP()">Chiudi</button>
+  <button onclick="closeP()">CHIUDI</button>
 </div>
 
 <script>
@@ -182,18 +163,18 @@ function next(n){
 
 function photo(){
   document.getElementById("content").innerHTML =
-    "<img src='foto_coppia.jpg'><p>Il nostro momento 💖</p>";
+    "<div>MEMORIA SBLCCATA</div><img src='foto_coppia.JPG'>";
   document.getElementById("popup").style.display = "block";
 }
 
 function gift(){
   document.getElementById("content").innerHTML =
-    "<img src='IMG_3842.jpeg'><p>Per te 🎁</p>";
+    "<div>REGALO TROVATO</div><img src='IMG_3842.jpeg'>";
   document.getElementById("popup").style.display = "block";
 }
 
 function music(){
-  window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ", "_blank");
+  window.open("https://www.youtube.com/watch?v=tTX6sJeZcmI&list=RDtTX6sJeZcmI&start_radio=1", "_blank");
 }
 
 function closeP(){
